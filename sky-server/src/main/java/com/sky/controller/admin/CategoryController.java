@@ -9,10 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/category")
@@ -33,5 +30,18 @@ public class CategoryController {
     @ApiOperation(value = "分类分页查询")
     public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO) {
         return Result.success(categoryService.pageQuery(categoryPageQueryDTO));
+    }
+
+    /**
+     * 修改分类
+     *
+     * @param categoryDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation(value = "修改分类")
+    public Result<Object> update(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.update(categoryDTO);
+        return Result.success();
     }
 }
