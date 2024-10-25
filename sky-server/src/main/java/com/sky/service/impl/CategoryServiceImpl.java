@@ -68,4 +68,39 @@ public class CategoryServiceImpl implements CategoryService {
                                     .build();
         categoryMapper.update(category);
     }
+
+    /**
+     * 根据id删除分类
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public void deleteById(Integer id) {
+        categoryMapper.delete(id);
+    }
+
+
+    /**
+     * 新增分类
+     * @param categoryDTO
+     * @return
+     */
+    @Override
+    public void save(CategoryDTO categoryDTO) {
+        Category category = Category.builder()
+                                    .name(categoryDTO.getName())
+                                    .sort(categoryDTO.getSort())
+                                    .type(categoryDTO.getType())
+                                    .build();
+        category.setCreateTime(LocalDateTime.now());
+        category.setUpdateTime(LocalDateTime.now());
+
+        category.setCreateUser(BaseContext.getCurrentId());
+        category.setUpdateUser(BaseContext.getCurrentId());
+
+        categoryMapper.save(category);
+    }
+
+
 }

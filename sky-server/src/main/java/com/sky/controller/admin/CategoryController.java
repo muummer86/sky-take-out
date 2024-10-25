@@ -2,6 +2,7 @@ package com.sky.controller.admin;
 
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.dto.EmployeeDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.CategoryService;
@@ -57,6 +58,33 @@ public class CategoryController {
     @ApiOperation(value = "启用、禁用分类")
     public Result<Object> status(@PathVariable Integer status, Long id) {
         categoryService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    /**
+     * 根据id删除分类
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping
+    @ApiOperation(value = "根据id删除分类")
+    public Result<Object> delete(Integer id) {
+        categoryService.deleteById(id);
+        return Result.success();
+    }
+
+    /**
+     * 新增分类
+     *
+     * @param categoryDTO
+     * @return
+     */
+    @PostMapping
+    @ApiOperation(value = "新增分类")
+    public Result<Object> insert(@RequestBody CategoryDTO categoryDTO) {
+
+        categoryService.save(categoryDTO);
         return Result.success();
     }
 }
