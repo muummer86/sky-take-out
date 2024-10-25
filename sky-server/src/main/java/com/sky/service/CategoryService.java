@@ -3,6 +3,7 @@ package com.sky.service;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.result.PageResult;
+import io.swagger.models.auth.In;
 
 public interface CategoryService {
 
@@ -41,6 +42,7 @@ public interface CategoryService {
 
     /**
      * 新增分类
+     *
      * @param categoryDTO
      * @return
      */

@@ -77,17 +77,20 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public void deleteById(Integer id) {
+        log.info("根据id删除分类");
         categoryMapper.delete(id);
     }
 
 
     /**
      * 新增分类
+     *
      * @param categoryDTO
      * @return
      */
     @Override
     public void save(CategoryDTO categoryDTO) {
+        log.info("新增分类");
         Category category = Category.builder()
                                     .name(categoryDTO.getName())
                                     .sort(categoryDTO.getSort())

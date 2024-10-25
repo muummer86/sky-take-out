@@ -83,7 +83,6 @@ public class CategoryController {
     @PostMapping
     @ApiOperation(value = "新增分类")
     public Result<Object> insert(@RequestBody CategoryDTO categoryDTO) {
-
         categoryService.save(categoryDTO);
         return Result.success();
     }
