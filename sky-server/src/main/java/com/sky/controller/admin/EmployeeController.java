@@ -140,7 +140,6 @@ public class EmployeeController {
     @ApiOperation(value = "编辑员工信息")
     public Result<Object> update(@RequestBody EmployeeDTO employeeDTO) {
         log.info("编辑员工信息");
-
         employeeService.update(employeeDTO);
         return Result.success();
     }
