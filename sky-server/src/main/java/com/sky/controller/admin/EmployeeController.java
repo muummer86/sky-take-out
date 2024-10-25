@@ -12,15 +12,12 @@ import com.sky.service.EmployeeService;
 import com.sky.utils.JwtUtil;
 import com.sky.vo.EmployeeLoginVO;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -114,11 +111,37 @@ public class EmployeeController {
      */
     @PostMapping("/status/{status}")
     @ApiOperation(value = "启用、禁用员工账号")
-    public Result status(@PathVariable Integer status, Long id) {
+    public Result<Object> status(@PathVariable Integer status, Long id) {
         log.info("启用禁用员工账号:{},{}", status, id);
         employeeService.startOrStop(status, id);
+        return Result.success();
+    }
 
+    /**
+     * 根据id查找员工
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据id查询员工")
+    public Result<Employee> getById(@PathVariable Long id) {
+        log.info("根据id查询员工");
+        return Result.success(employeeService.getById(id));
+    }
 
+    /**
+     * 编辑员工信息
+     *
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation(value = "编辑员工信息")
+    public Result<Object> update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("编辑员工信息");
+
+        employeeService.update(employeeDTO);
         return Result.success();
     }
 }
